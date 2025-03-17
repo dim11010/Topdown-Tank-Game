@@ -1,10 +1,11 @@
-[gd_scene load_steps=7 format=2]
+[gd_scene load_steps=8 format=2]
 
 [ext_resource path="res://Terrain/terrain_tiles.tres" type="TileSet" id=1]
 [ext_resource path="res://Tanks/Player.tscn" type="PackedScene" id=2]
 [ext_resource path="res://Maps/Map.gd" type="Script" id=3]
 [ext_resource path="res://Tanks/Enemy.tscn" type="PackedScene" id=4]
 [ext_resource path="res://Tanks/SuperEnemyTank.tscn" type="PackedScene" id=5]
+[ext_resource path="res://UI/HUD.tscn" type="PackedScene" id=6]
 
 [sub_resource type="Curve2D" id=1]
 _data = {
@@ -22,6 +23,7 @@ tile_data = PoolIntArray( -1, 0, 0, -65536, 0, 0, -65535, 0, 0, -65534, 0, 0, -6
 
 [node name="Player" parent="." instance=ExtResource( 2 )]
 position = Vector2( 2414, 576 )
+max_health = 100
 
 [node name="Paths" type="Node2D" parent="."]
 
@@ -50,7 +52,12 @@ rotation = 1.53812
 [node name="EnemyTank" parent="Paths2/Path2D/PathFollow2D" instance=ExtResource( 5 )]
 detect_radius = 500
 
+[node name="HUD" parent="." instance=ExtResource( 6 )]
+
+[connection signal="health_changed" from="Player" to="HUD" method="update_healthbar"]
 [connection signal="shoot" from="Player" to="." method="_on_Tank_shoot"]
+[connection signal="shoot" from="Paths/Path2D/PathFollow2D/Tank" to="." method="_on_Tank_shoot"]
+[connection signal="shoot" from="Paths2/Path2D/PathFollow2D/EnemyTank" to="." method="_on_Tank_shoot"]
 
 [editable path="Player"]
 [editable path="Paths/Path2D/PathFollow2D/Tank"]

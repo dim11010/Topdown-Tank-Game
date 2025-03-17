@@ -7,5 +7,13 @@
 [node name="Body" parent="." index="0"]
 region_rect = Rect2( 103.652, 345.983, 111.62, 95.6343 )
 
+[node name="CollisionShape2D" parent="." index="1"]
+position = Vector2( -11.9983, -0.391483 )
+
 [node name="Turret" parent="." index="2"]
+rotation = -0.00889538
+offset = Vector2( 35, 0 )
 region_rect = Rect2( 464.503, 58.5923, 61.3868, 31.9212 )
+
+[node name="Muzzle" parent="Turret" index="0"]
+position = Vector2( 100, 0 )
